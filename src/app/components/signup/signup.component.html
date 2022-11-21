@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                Registro
+            </div>
+            <div class="card-body">
+                <form (submit)="signUp()">
+                    <div class="form-group">
+                        <label for="ced">Cédula</label>
+                        <input type="text" [(ngModel)]="user.ced" name="ced" id="ced" class="form-control" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" [(ngModel)]="user.name" name="nombre" id="nombre" class="form-control" required>
+                    </div>
+                    
+                    <!-- <div class="form-group">
+                        <label for="Name">Dependencia</label>
+                            
+                        <select id="combo1" name="select" class="custom-select">
+                            <option selected>Seleccione una opción</option>
+                            <option value="1">UNO</option>
+                            <option value="2">DOS</option>
+                            <option value="3">TRES</option>
+                          </select>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="dependencia">Dependencia</label>
+                        <input type="text" [(ngModel)]="user.dependencia" name="dependencia" id="dependencia" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo</label>
+                        <input type="email" [(ngModel)]="user.email" name="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass">Contraseña</label>
+                        <input type="password" [(ngModel)]="user.password" name="pass" id="pass" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" [(ngModel)]="user.telefono" name="tel" id="tel" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
+import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -8,9 +10,44 @@ import {HttpClient} from '@angular/common/http'
 export class AuthService {
   private URL='http://localhost:3000/api'
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+    private router:Router
+    ) { }
 
   signUp(user:any){
    return this.http.post<any>(this.URL+'/auth/signup',user);
   }
+  login(user:any){
+   return this.http.post<any>(this.URL+'/auth/signin',user);
+  }
+  loggedIn():Boolean{
+    return !!localStorage.getItem('token')
+  }
+  getToken(){
+    return localStorage.getItem('token')
+  }
+  registerUser(user:any){
+    return this.http.post<any>(this.URL+'/auth/registeruser',user);
+  }
+  createEspace(espacio:any){
+    return this.http.post<any>(this.URL+'/auth/crearespacio',espacio);
+  }
+ 
+  logOut(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('roles');
+    localStorage.removeItem('dependencia');
+    this.router.navigate(['/home']);
+  
+  }
+  getDependencias(){
+    return this.http.get(this.URL +'/auth/dependencias');
+  }
+  getRoles(){
+    return this.http.get(this.URL +'/auth/roles');
+  }
+  getTiposEspFis(){
+    return this.http.get(this.URL+'/auth/tipoespfis');
+  }
+
 }

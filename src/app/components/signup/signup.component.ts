@@ -15,15 +15,13 @@ export class SignupComponent implements OnInit {
  bandera=false;
  user={
     name:'',
-    ced:'',   
-    roles:[''], 
+    ced:'', 
     dependencia:'',
     email : '',
     password:'',
     telefono:''
   }
   dependencias: any = [];
-  roles: any = [];
   constructor(public authService:AuthService,
     
     private router:Router,
@@ -34,7 +32,6 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDependencias();
-    this.getRoles();
   }
 
   onFacultad(e: any) {
@@ -58,23 +55,6 @@ export class SignupComponent implements OnInit {
     );
   };
 
-  getRoles(){
-    console.log("soy un rol")
-    this.authService.getRoles().subscribe(
-      res => {
-        for(let i of Object.values(res)){
-          this.roles.push(i);
-        }
-       
-      },
-      err=>console.log(err)
-    )
-  };
-
-  onRole(e: any) {
-    console.log(e.target.value);
-    this.user.roles=[e.target.value];
-                };
   signUp(){
     if(this.user.email.indexOf("@udenar.edu.co")!==-1)
     {
@@ -82,10 +62,10 @@ export class SignupComponent implements OnInit {
       .subscribe(
         res=>{        
           // console.log(res.token)
-          localStorage.setItem('token',res.token)
-          localStorage.setItem('roles',res.roles)
-          localStorage.setItem('dependencia',res.dependencia)
-          this.router.navigate(['/reservas']);
+          //localStorage.setItem('token',res.token)
+          //localStorage.setItem('roles',res.roles)
+          //localStorage.setItem('dependencia',res.dependencia)
+          this.router.navigate(['/signin']);
         },
         err=>console.log(err)
       )

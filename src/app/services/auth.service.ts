@@ -49,5 +49,8 @@ export class AuthService {
   getTiposEspFis(){
     return this.http.get(this.URL+'/auth/tipoespfis');
   }
+  getEspacios(){
+    return this.http.get(this.URL+'/auth/espacios');
+  }
 
 }

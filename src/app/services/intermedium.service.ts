@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class IntermediumService {
   
-
+  mensaje='';
   tipo_user='';
   dependencia='';
   constructor(private authService:AuthService,
@@ -21,22 +21,25 @@ export class IntermediumService {
               res=>{
                 localStorage.setItem('token',res.token);
                 localStorage.setItem('roles',res.roles);
-                this.tipo_user=res.roles;
-                this.dependencia=res.dependencia;
-                if(localStorage.getItem('roles')==='USER')
-                {
-                  this.router.navigate(['/reservas'])
-                }
-                else if(localStorage.getItem('roles')==='ADMIN')
-                {
-                  this.router.navigate(['/admin'])
-                }
-                else
-                  this.router.navigate(['/registeruser'])
-                },
-              err=>console.log(err)
-            );
-            
+                
+                  this.tipo_user=res.roles;
+                  this.dependencia=res.dependencia;
+                  if(localStorage.getItem('roles')==='USER')
+                  {
+                    this.router.navigate(['/reservas'])
+                  }
+                  else if(localStorage.getItem('roles')==='ADMIN')
+                  {
+                    this.router.navigate(['/admin'])
+                  }
+                  else
+                    this.router.navigate(['/registeruser'])
+              }
+                ,
+              err=>{console.log(err),
+                this.mensaje="Error con el usuario o la clave"}
+            )
+            ;
             
           }
           esUser(){
@@ -61,6 +64,9 @@ export class IntermediumService {
               return true;
             }
             else return false;
+          }
+          getMensaje():string{
+            return this.mensaje
           }
           
 }

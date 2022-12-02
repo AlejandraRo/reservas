@@ -12,7 +12,8 @@ export class SigninComponent implements OnInit {
   
   user={email:'',
         password:''}
-
+  mensaje='';
+  bandera=false;
   tipo_user='';
   dependencia='';
   constructor(
@@ -26,6 +27,12 @@ export class SigninComponent implements OnInit {
   login(){
     this.intmService.login(this.user);
     
+    if(this.intmService.getMensaje()!=="")
+    {
+      this.mensaje=this.intmService.getMensaje();  
+      this.bandera=true;
+    }
+     
     
   }
 

@@ -12,8 +12,9 @@ export class GestionarespaciosComponent implements OnInit {
   bandera=false;
   espacio={
     name:'',
-    tipo:''
+    tipoesp:''
   };
+  espacios:any=[];
   
   constructor(public authService:AuthService) { }
 
@@ -21,6 +22,7 @@ export class GestionarespaciosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTipos();
+    this.getEspacio();
   }
 
   getTipos(){
@@ -34,16 +36,30 @@ export class GestionarespaciosComponent implements OnInit {
     )
   };
   onTipo(e:any){
-    this.espacio.tipo=e.target.value;
+    this.espacio.tipoesp=e.target.value;
   };
   crearEspacio(){
+    console.log("-----------", this.espacio)
   this.authService.createEspace(this.espacio)
   .subscribe(res=>{
     this.bandera=true;
      this.mensaje="Espacio registrado con éxito";
+     location.reload();
   },
-  err=>console.log(err))
+  err=>{console.log(err),
+  this.bandera=true;
+  this.mensaje="El espacio ya existe"})
   }
   
+  getEspacio(){
+  
+    this.authService.getEspacios().subscribe(
+      res=>{
+        this.espacios = res;
+        
+      },
+      err=>console.log(err)
+    )
+  }
 
 }

@@ -8,7 +8,7 @@
         <div class="form-group">
             <label class="col-sm-12">Tipo Espacio Físico</label>
             <div class="col-sm-12">
-                <select class="form-control" [(ngModel)]="espacio.tipo" ng-disabled="perfil_isEdit"
+                <select class="form-control" [(ngModel)]="espacio.tipoesp" ng-disabled="perfil_isEdit"
                 name="tipo" id="tipo" required (change)="onTipo($event)">
                     <option value="" selected>--- Seleccione ---</option>
                     <option *ngFor="let tipo of tipos"  ngDefaultControl
@@ -21,4 +21,21 @@
     <div *ngIf="bandera" class="alert alert-danger" id="mensaje">
         {{mensaje}}
     </div>
+
+    <br>
+    <div>
+        <h1>Espacios existentes</h1>
+        <table class="table">
+            <tr>
+                <td><b>Nombre</b></td>
+                <td><b>Tipo</b></td>
+            </tr>
+            <tr *ngFor="let espacio of espacios">
+                <td>{{espacio.name}}</td>
+                <td>{{espacio.tipo_espacio.name}}</td>
+            </tr>
+        </table>
+    </div>
+
+    
 </div>
